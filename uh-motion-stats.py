@@ -19,13 +19,14 @@ chromedriver_location = 'UNSET'
 
 
 def main():
-
+    """Drive the script"""
     load_env_variables()
     rankings = get_leardboard_stats()
     print_text_rankings(rankings)
 
 
 def load_env_variables():
+    """Load required settings/config from shell variables"""
     global email, password, chromedriver_location
     try:
         email = os.environ["UH_MOTION_EMAIL"]
@@ -40,12 +41,15 @@ def load_env_variables():
 
 
 def get_leardboard_stats():
+    """Scrape UH Motion website and return leaderboard as sorted list of dicts"""
 
-    # reveal and fill in log-in form
+    # Load page and reveal log-in form
     browser = webdriver.Chrome(chromedriver_location)
     browser.get(uh_motion_homepage)
     browser.implicitly_wait(10)
     browser.find_element_by_link_text('LOG IN').click()
+
+    # Fill in and submit log-in form
     email_field = browser.find_element_by_xpath('//div[2]/div/div/form/div/div[2]/input')
     email_field.click()
     email_field.send_keys(email)
@@ -53,7 +57,7 @@ def get_leardboard_stats():
     password_field.send_keys(password)
     password_field.send_keys(Keys.ENTER)
 
-    # Log-in redirect and browse to rankins page
+    # Log-in redirect and browse to rankings page
     browser.implicitly_wait(10)
     browser.find_element_by_link_text('Rankings').click()
     browser.implicitly_wait(5)
@@ -83,12 +87,14 @@ def get_leardboard_stats():
     browser.implicitly_wait(5)
     browser.quit()
 
+    # Returns list of dicts, sorted by ranking
     return rankings
 
 
 def print_text_rankings(rankings):
+    """Print rankings list to console in simple text format"""
 
-    # Pretty printing out to user
+    # Print head fields and diver
     print ""
     print "{0:3} {1:16} {2:6}  {3:8} {4:8}".format(
         '#', 'Name', 'M-avg', 'M-cur', 'Lifetime'
@@ -97,6 +103,8 @@ def print_text_rankings(rankings):
         '---', '----------------',
         '------', '--------', '--------'
     )
+
+    # Print out each person's records, UHM determines rank by monthly_average
     for person in rankings:
         print "{0:3} {1:16} {2:6}  {3:8} {4:8}".format(
             person['rank'],
@@ -107,5 +115,7 @@ def print_text_rankings(rankings):
         )
     print ""
 
+
+# Default action is to call main() to drive script
 if __name__ == "__main__":
     main()
