@@ -67,12 +67,14 @@ def get_leardboard_stats():
     for row in rows:
         # Get the columns (all the column 2)
         cols = row.find_elements_by_tag_name("td")
-        person = {}
-        person['rank'] = cols[0].text
-        person['name'] = cols[1].text
-        person['steps_monthly_current'] = cols[2].text
-        person['steps_monthly_average'] = cols[3].text
-        person['steps_lifetime'] = cols[4].text
+        person = {
+            'rank': cols[0].text,
+            'name': cols[1].text,
+            'steps_monthly_current': cols[2].text,
+            'steps_monthly_average': cols[3].text,
+            'steps_lifetime': cols[4].text
+        }
+
         rankings.append(person)
 
     # log out (playing nice) and clean up browser
