@@ -11,14 +11,12 @@ from selenium.webdriver.common.keys import Keys
 # TODO: Rename this variable - uh_motion_hompage
 url = 'https://www.unitedhealthcaremotion.com/'
 
-# TODO: move this to env variable
-path_to_chromedriver = '/Users/jrlorence/PycharmProjects/UHMotionStats/chromedriver'
-
 ###################
 # GLOBAL VARIABLES
 ###################
 email = 'UNSET'
 password = 'UNSET'
+chromedriver_location = 'UNSET'
 
 
 def main():
@@ -29,19 +27,23 @@ def main():
 
 
 def load_env_variables():
-    global email, password
+    global email, password, chromedriver_location
     try:
         email = os.environ["UH_MOTION_EMAIL"]
         password = os.environ["UH_MOTION_PW"]
+        chromedriver_location = os.environ["CHROMEDRIVER_LOCATION"]
     except KeyError:
-        print "ERROR: Please set UH_MOTION_EMAIL and UH_MOTION_PW env variables"
+        print "ERROR: Please set the following environment variables:\n" \
+               "1) UH_MOTION_EMAIL = User's UHM email address\n" \
+               "2) UH_MOTION_PW = User's UHM password\n" \
+               "3) CHROMEDRIVER_LOCATION = Full path to chromdriver binary\n"
         sys.exit(-1)
 
 
 def get_leardboard_stats():
 
     # reveal and fill in log-in form
-    browser = webdriver.Chrome(path_to_chromedriver)
+    browser = webdriver.Chrome(chromedriver_location)
     browser.get(url)
     browser.find_element_by_link_text('LOG IN').click()
     email_field = browser.find_element_by_xpath('//div[2]/div/div/form/div/div[2]/input')
