@@ -8,8 +8,7 @@ from selenium.webdriver.common.keys import Keys
 ##################
 # Settings
 ##################
-# TODO: Rename this variable - uh_motion_hompage
-url = 'https://www.unitedhealthcaremotion.com/'
+uh_motion_homepage = 'https://www.unitedhealthcaremotion.com/'
 
 ###################
 # GLOBAL VARIABLES
@@ -44,7 +43,7 @@ def get_leardboard_stats():
 
     # reveal and fill in log-in form
     browser = webdriver.Chrome(chromedriver_location)
-    browser.get(url)
+    browser.get(uh_motion_homepage)
     browser.find_element_by_link_text('LOG IN').click()
     email_field = browser.find_element_by_xpath('//div[2]/div/div/form/div/div[2]/input')
     email_field.click()
