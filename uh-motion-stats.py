@@ -44,6 +44,7 @@ def get_leardboard_stats():
     # reveal and fill in log-in form
     browser = webdriver.Chrome(chromedriver_location)
     browser.get(uh_motion_homepage)
+    browser.implicitly_wait(10)
     browser.find_element_by_link_text('LOG IN').click()
     email_field = browser.find_element_by_xpath('//div[2]/div/div/form/div/div[2]/input')
     email_field.click()
@@ -59,7 +60,7 @@ def get_leardboard_stats():
 
     # Parse and store rankings results
     table_id = browser.find_element_by_id('rankTable')
-    table_body = browser.find_element_by_tag_name('tbody')
+    table_body = table_id.find_element_by_tag_name('tbody')
     rows = table_body.find_elements_by_tag_name("tr")
 
     # parse ranking table, and safe off people for later printing
