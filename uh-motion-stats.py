@@ -98,7 +98,7 @@ def get_leaderboard_stats():
 def print_text_rankings(rankings):
     """Print rankings list to console in simple text format"""
 
-    # Print head fields and diver
+    # Print head fields and divider
     print ""
     print "{0:3} {1:16} {2:6}  {3:8} {4:8}".format(
         '#', 'Name', 'M-avg', 'M-cur', 'Lifetime'
