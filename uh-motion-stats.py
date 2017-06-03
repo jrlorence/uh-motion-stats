@@ -104,8 +104,7 @@ def print_text_rankings(rankings):
         '#', 'Name', 'M-avg', 'M-cur', 'Lifetime'
     )
     print "{0:3} {1:16} {2:6}  {3:8} {4:8}".format(
-        '---', '----------------',
-        '------', '--------', '--------'
+        '---', '----------------', '------', '--------', '--------'
     )
 
     # Print out each person's records, UHM determines rank by monthly_average
