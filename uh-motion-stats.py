@@ -21,7 +21,7 @@ chromedriver_location = 'UNSET'
 def main():
     """Drive the script"""
     load_env_variables()
-    rankings = get_leardboard_stats()
+    rankings = get_leaderboard_stats()
     print_text_rankings(rankings)
 
 
@@ -37,12 +37,12 @@ def load_env_variables():
                 "ERROR: Please set the following environment variables:\n",
                 "1) UH_MOTION_EMAIL = User's UHM email address\n",
                 "2) UH_MOTION_PW = User's UHM password\n",
-                "3) CHROMEDRIVER_LOCATION = Full path to chromdriver binary\n"
+                "3) CHROMEDRIVER_LOCATION = Full path to chromedriver binary\n"
         )
         sys.exit(-1)
 
 
-def get_leardboard_stats():
+def get_leaderboard_stats():
     """Scrape UH Motion website and return leaderboard as sorted list of dicts"""
 
     # Load page and reveal log-in form
