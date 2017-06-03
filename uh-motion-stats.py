@@ -33,10 +33,12 @@ def load_env_variables():
         password = os.environ["UH_MOTION_PW"]
         chromedriver_location = os.environ["CHROMEDRIVER_LOCATION"]
     except KeyError:
-        print "ERROR: Please set the following environment variables:\n" \
-               "1) UH_MOTION_EMAIL = User's UHM email address\n" \
-               "2) UH_MOTION_PW = User's UHM password\n" \
-               "3) CHROMEDRIVER_LOCATION = Full path to chromdriver binary\n"
+        print (
+                "ERROR: Please set the following environment variables:\n",
+                "1) UH_MOTION_EMAIL = User's UHM email address\n",
+                "2) UH_MOTION_PW = User's UHM password\n",
+                "3) CHROMEDRIVER_LOCATION = Full path to chromdriver binary\n"
+        )
         sys.exit(-1)
 
 
@@ -59,6 +61,7 @@ def get_leardboard_stats():
 
     # Log-in redirect and browse to rankings page
     browser.implicitly_wait(10)
+    # TODO: Need to deal with occasional "Congratulations" new badges pop-up
     browser.find_element_by_link_text('Rankings').click()
     browser.implicitly_wait(5)
 
@@ -85,6 +88,7 @@ def get_leardboard_stats():
     # log out (playing nice) and clean up browser
     browser.find_element_by_link_text('LOG OUT').click()
     browser.implicitly_wait(5)
+    # TODO: Need to add some way to make sure we always quit driver
     browser.quit()
 
     # Returns list of dicts, sorted by ranking
